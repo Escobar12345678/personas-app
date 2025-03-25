@@ -12,4 +12,7 @@ class Pais extends Model
     protected $primaryKey = 'pais_codi';
     public $timestamps = false;
 
+    protected $fillable = ['pais_codi', 'pais_nomb', 'pais_capi'];
+
+
 }
