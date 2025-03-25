@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ComunaController; 
+use App\Http\Controllers\ComunaController;
+use App\Http\Controllers\MunicipioController; 
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,3 +14,10 @@ Route::get('/comunas/create', [ComunaController::class, 'create'])->name('comuna
 Route::delete('/comunas/{comuna}', [ComunaController::class, 'destroy'])->name('comunas.destroy');
 Route::put('/comunas/{comuna}', [ComunaController::class, 'update'])->name('comunas.update');
 Route::get('/comunas/{comuna}/edit', [ComunaController::class, 'edit'])->name('comunas.edit');
+
+Route::get('/municipios', [MunicipioController::class, 'index'])->name('municipios.index');
+Route::post('/municipios', [MunicipioController::class, 'store'])->name('municipios.store');
+Route::get('/municipios/create', [MunicipioController::class, 'create'])->name('municipios.create');
+Route::delete('/municipios/{municipio}', [MunicipioController::class, 'destroy'])->name('municipios.destroy');
+Route::put('/municipios/{municipio}', [MunicipioController::class, 'update'])->name('municipios.update');
+Route::get('/municipios/{municipio}/edit', [MunicipioController::class, 'edit'])->name('municipios.edit');
