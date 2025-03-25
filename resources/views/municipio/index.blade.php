@@ -20,6 +20,7 @@
             <tr>
             <th scope="col">Código</th>
             <th scope="col">Nombre del Municipio</th>
+            <th scope="col">Nombre del Departamento</th>
             <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
             <tr>
                 <th scope="row">{{ $municipio->muni_codi }}</th>
                 <td>{{ $municipio->muni_nomb }}</td>
+                <td>{{ $municipio->depa_nomb }}</td>
                 <td>
                 <a href="{{ route('municipios.edit', ['municipio' => $municipio->muni_codi]) }}" class="btn btn-info">Edit</a>
                  
