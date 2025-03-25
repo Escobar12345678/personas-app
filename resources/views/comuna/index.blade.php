@@ -10,7 +10,7 @@
 
     <title>Listado de Comunas</title>
   </head>
-  
+
   <body>
     <div class="container">
         <h1>Commune List</h1>
@@ -18,10 +18,10 @@
         <table class="table">
         <thead>
             <tr>
-            <th scope="col">Code</th>
-            <th scope="col">Commune</th>
-            <th scope="col">Municipality</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre de Comuna</th>
+            <th scope="col">Municipio</th>
+            <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
