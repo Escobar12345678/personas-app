@@ -16,9 +16,11 @@ class PaisController extends Controller
     public function index()
     {
         $paises = DB::table('tb_pais')
-        ->select('tb_pais.*')
-        ->get();
-      return view('pais.index', ['paises' => $paises]);
+            ->join('tb_municipio', 'tb_pais.pais_capi', '=', 'tb_municipio.muni_codi')
+            ->select('tb_pais.*', 'tb_municipio.muni_nomb')
+            ->get();
+        return view("pais.index", ['paises' => $paises]);
+
     }
 
     /**
@@ -28,7 +30,11 @@ class PaisController extends Controller
      */
     public function create()
     {
-        return view('pais.new');
+        $municipios = DB::table('tb_municipio')
+        ->orderBy('muni_nomb')
+        ->get();
+    return view('pais.new', ['municipios' => $municipios]);
+
     }
 
     /**
@@ -39,19 +45,18 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'code' => 'required|string|size:3|unique:tb_pais,pais_codi',
-            'name' => 'required|string|max:255',
-            'capital' => 'nullable|string|max:255',
-        ]);
-    
-        Pais::create([
-            'pais_codi' => strtoupper($request->code),
-            'pais_nomb' => $request->name,
-            'pais_capi' => $request->capital, // Agregando la capital
-        ]);
-    
-        return redirect()->route('paises.index')->with('success', 'País agregado correctamente.');
+        $pais = new Pais();
+        $pais->pais_codi = strtoupper(substr($request->name, 0, 3));
+        $pais->pais_nomb = $request->name;
+        $pais->pais_capi = $request->code;
+        $pais->save();
+
+        $paises = DB::table('tb_pais')
+            ->join('tb_municipio', 'tb_pais.pais_capi', '=', 'tb_municipio.muni_codi')
+            ->select('tb_pais.*', 'tb_municipio.muni_nomb')
+            ->get();
+        return view("pais.index", ['paises' => $paises]);
+
     }
     
     
@@ -98,6 +103,13 @@ class PaisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pais = Pais::find($id);
+        $pais->delete();
+
+        $paises = DB::table('tb_pais')
+            ->join('tb_municipio', 'tb_pais.pais_capi', '=', 'tb_municipio.muni_codi')
+            ->select('tb_pais.*', 'tb_municipio.muni_nomb')
+            ->get();
+        return view("pais.index", ['paises' => $paises]);
     }
 }

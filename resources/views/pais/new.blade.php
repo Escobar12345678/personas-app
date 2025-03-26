@@ -11,27 +11,31 @@
     <title>Add País</title>
   </head>
   <body>
-    <div class="container">
-        <h1>Add País</h1>
+    <div class="container mt-5">
+        <h1 class="text-primary">Add País</h1>
 
         <form method="POST" action="{{ route('paises.store') }}">
             @csrf
 
             <div class="mb-3">
                 <label for="id" class="form-label">Code</label>
-                <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id" disabled="disabled">
+                <input type="text" class="form-control" id="id" name="id" disabled>
                 <div id="idHelp" class="form-text">Country code</div>
             </div>
-            
-            <div class="mb-3">
-                <label for="capital" class="form-label">Capital</label>
-                <input type="text" class="form-control" id="capital" name="capital" placeholder="Ej: Bogotá">
-            </div>
-
 
             <div class="mb-3">
                 <label for="name" class="form-label">País</label>
-                <input type="text" required class="form-control" id="name" aria-describedby="nameHelp" name="name" placeholder="Country name.">
+                <input type="text" required class="form-control" id="name" name="name" placeholder="Country name.">
+            </div>
+
+            <div class="mb-3">
+                <label for="capital" class="form-label">Capital</label>
+                <select class="form-select" id="capital" name="code" required>
+                    <option selected disabled value="">Choose one...</option>
+                    @foreach ($municipios as $municipio)
+                        <option value="{{ $municipio->muni_codi }}">{{ $municipio->muni_nomb }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mt-3">
