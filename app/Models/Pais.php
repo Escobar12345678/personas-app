@@ -10,9 +10,7 @@ class Pais extends Model
     use HasFactory;
     protected $table = 'tb_pais';
     protected $primaryKey = 'pais_codi';
+    protected $keyType = 'string';
     public $timestamps = false;
-
-    protected $fillable = ['pais_codi', 'pais_nomb', 'pais_capi'];
-
 
 }
